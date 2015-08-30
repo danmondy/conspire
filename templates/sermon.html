@@ -1,0 +1,13 @@
+{{define "sermon"}}
+{{template "_header" .Page}}
+<div class="container">
+
+
+  <h2>{{.Page.Title}}</h2>
+  <div>This is the Main page</div>
+  
+  {{template "_sermon" .Sermon}}
+  
+</div>
+{{template "_footer" .Page}}
+{{end}}

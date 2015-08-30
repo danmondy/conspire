@@ -1,0 +1,7 @@
+{
+    "title" : "conspire",
+    "version" : "0.1",
+    "port" : "24601",
+    "db" : "./sql/conspire.db"
+}
+

@@ -1,0 +1,5 @@
+2015/08/29 23:33:45 Log file opened for writing
+2015/08/29 23:33:45 ./sql/conspire.db
+2015/08/29 23:33:45 registering routes...
+2015/08/29 23:33:45 Routes registered.
+2015/08/29 23:33:45 Server running on 24601

@@ -1,0 +1,28 @@
+{{define "_events"}}
+<style type="text/css">
+      #map-canvas { height: 400px; margin: 0; padding: 0;}
+</style>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
+  <!--https://maps.googleapis.com/maps/api/js?key=AIzaSyA5IboeLSA0gsoiOXYVPHJ97_ycaF4BovY-->
+</script>
+<div class="container">
+<div class="row">
+  <div class="col-sm-9">
+    <div id="map-canvas"></div>
+  </div>
+  <div class="col-sm-3">
+    <div class="btn-group-vertical" style="width:100%" role="group">
+    {{range .}}
+      <button type="button" id="event-{{.Id}}" class="btn btn-default">{{.Title}}</button>
+    {{end}}
+    </ul>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+var events = {{.}};//this line is very important
+</script>
+
+<script type="text/javascript" src="/public/js/events_map.js"></script>
+
+{{end}}

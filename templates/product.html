@@ -1,0 +1,11 @@
+{{define "product"}}
+{{template "_header" .Page}}
+<div class="content">
+  <h2>{{.Title}}</h2>
+  <div>This is the product page</div>
+ 
+  {{template "_product" .Product}}
+
+</div>
+{{template "_footer" .Page}}
+{{end}}

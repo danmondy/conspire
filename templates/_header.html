@@ -1,0 +1,67 @@
+{{define "_header"}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{.Title}}</title>
+    <link id="css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/sandstone/bootstrap.min.css" rel="stylesheet">    
+    <link href="/public/css/flog.css" rel="stylesheet">    
+
+    <style type="text/css">
+      body {padding-bottom: 70px;}
+      .content {margin:10px;}
+      </style>
+    </head>
+  <body>
+
+
+
+  <nav class="navbar navbar-inverse navbar-top">
+    <div class="container-fluid">
+      <div class="container">
+      <div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+	</button>
+	<a class="navbar-brand" href="#">Flog V0.2</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+	<ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+	  <li><a href="/about">About</a></li>
+	  <li><a href="/events">Events</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Style<span class="caret"></span></a>
+            <ul class="dropdown-menu" id="css-dropdown" role="menu">
+              <li><a href="#" data-css="sandstone">Sandstone</a></li>
+              <li><a href="#" data-css="readable">Readible</a></li>
+              <li><a href="#" data-css="superhero">Superhero</a></li>
+              <li class="divider"></li>
+              <li><a href="#" data-css="darkly">Darkly</a></li>
+              <li><a href="#" data-css="cyborg">cyborg</a></li>
+            </ul>
+          </li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+	  <li><a href="#" id="loginButton" class="glyphicon glyphicon-user" aria-hidden="true" style="font-size:2em">login</a></li>
+	</ul>
+	<form class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+	</form>
+      </div>
+    </div>
+    </div>
+  </nav>
+
+
+
+
+{{template "_alerts" .}}
+{{template "_modals" .}}
+
+{{end}}

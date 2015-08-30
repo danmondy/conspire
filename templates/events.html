@@ -1,0 +1,16 @@
+b{{define "events"}}
+{{template "_header" .Page}}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>{{.Page.Title}}</h1>
+    </div>
+  </div>
+</div>
+{{template "_events" .Events}}
+
+
+{{template "_footer" .Page}}
+{{end}}
+
+

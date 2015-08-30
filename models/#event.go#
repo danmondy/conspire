@@ -1,0 +1,28 @@
+package models
+
+import (
+	"time"
+)
+
+type Event struct{
+	Id int
+	Title string
+	Description string
+	Long, Lat string
+	Date time.Time
+	Open bool
+
+	Creator *User
+	Community Community	
+	Admins []User
+	Images []string
+	Invites []User
+	Attendess []User
+	Declined []User
+}
+
+//GetEventMap returns a map of the struct in name -> type pairs
+func GetEventMap()map[string]string{
+	return map[string]string{"Id" : "int", "Title":"string"}
+}
+

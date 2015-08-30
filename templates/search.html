@@ -1,0 +1,11 @@
+{{define "search"}}
+{{template "_header" .Page}}
+<div class="content">
+  <h2>{{.Title}}</h2>
+  <div>This is the Search page</div>
+  {{range .Products}}
+  {{.Products.Html}}
+  {{end}}
+</div>
+{{template "_footer" .Page}}
+{{end}}

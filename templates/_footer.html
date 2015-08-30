@@ -1,0 +1,34 @@
+{{define "_footer"}}
+<div class="navbar-fixed-text">
+  <div class="container">
+    <p>Built by Daniel Mondy</p>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+  var day = true;
+$(document).ready(function() { 
+  $("#css-dropdown>li>a").click(function(){
+    ChangeStyle($(this).data('css'));
+    return false;
+  });
+  
+  $("#loginButton").click(function() {
+    $("#loginModal").modal('toggle');
+  });
+
+
+});
+
+function ChangeStyle(name){
+  $("link#css").attr("href", "//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/"+name+"/bootstrap.min.css");
+}
+
+</script>
+
+</body>
+</html>
+{{end}}
+

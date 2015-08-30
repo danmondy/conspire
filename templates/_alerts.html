@@ -1,0 +1,36 @@
+{{define "_alerts"}}
+
+<div class="container">
+{{if .Warnings}}
+
+  {{range .Warnings}}
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Oops!</strong> {{.}}
+  </div>
+  {{end}}
+  {{end}}
+
+  {{if .Alerts}}
+  {{range .Alerts}}
+  <div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Oops!</strong> {{.}}
+  </div>
+  {{end}}
+  {{end}}
+
+  {{if .Messages}}
+  {{range .Messages}}
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Oops!</strong> {{.}}
+  </div>
+  {{end}}
+  {{end}}
+</div>
+{{end}}
+
+
+
+
