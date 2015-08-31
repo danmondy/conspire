@@ -1,5 +1,76 @@
-2015/08/29 23:33:45 Log file opened for writing
-2015/08/29 23:33:45 ./sql/conspire.db
-2015/08/29 23:33:45 registering routes...
-2015/08/29 23:33:45 Routes registered.
-2015/08/29 23:33:45 Server running on 24601
+2015/08/31 01:53:32 logfile:  0x40e49c0
+2015/08/31 01:53:32 registering routes...
+2015/08/31 01:53:32 Routes registered.
+2015/08/31 01:53:32 Server running on 24601
+2015/08/31 01:53:36 Profile Handler hit
+2015/08/31 01:53:36 HERE: {0 Sarah Jenkins sj@gmail.com  -86.021 33.53  0001-01-01 00:00:00 +0000 UTC}
+2015/08/31 01:53:36 http: panic serving [::1]:51551: reflect: call of reflect.Value.NumField on interface Value
+goroutine 39 [running]:
+net/http.(*conn).serve.func1(0xc82014a0b0, 0x5801398, 0xc820130170)
+	/usr/local/go/src/net/http/server.go:1287 +0xb5
+reflect.flag.mustBe(0xd4, 0x19)
+	/usr/local/go/src/reflect/value.go:199 +0xa6
+reflect.Value.NumField(0x4413860, 0xc82000b770, 0xd4, 0x4da40a8)
+	/usr/local/go/src/reflect/value.go:1146 +0x2a
+github.com/danmondy/conspire/repo.(*Repo).Insert(0xc8201300e8, 0x4534cb0, 0x7, 0x44fd7c0, 0xc82008a880, 0x0, 0x0)
+	/Users/daniel/Code/go/src/github.com/danmondy/conspire/repo/repo.go:43 +0x281
+github.com/danmondy/conspire/routes.profile(0x4da49d8, 0xc8200ca840, 0xc820144a80)
+	/Users/daniel/Code/go/src/github.com/danmondy/conspire/routes/index.go:58 +0x1b6
+net/http.HandlerFunc.ServeHTTP(0x45e6308, 0x4da49d8, 0xc8200ca840, 0xc820144a80)
+	/usr/local/go/src/net/http/server.go:1422 +0x3a
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc82012e9b0, 0x4da49d8, 0xc8200ca840, 0xc820144a80)
+	/Users/daniel/Code/go/src/github.com/gorilla/mux/mux.go:98 +0x29e
+net/http.serverHandler.ServeHTTP(0xc8201368a0, 0x4da49d8, 0xc8200ca840, 0xc820144a80)
+	/usr/local/go/src/net/http/server.go:1862 +0x19e
+net/http.(*conn).serve(0xc82014a0b0)
+	/usr/local/go/src/net/http/server.go:1361 +0xbee
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:1910 +0x3f6
+2015/08/31 01:53:36 Profile Handler hit
+2015/08/31 01:53:36 HERE: {0 Sarah Jenkins sj@gmail.com  -86.021 33.53  0001-01-01 00:00:00 +0000 UTC}
+2015/08/31 01:53:36 http: panic serving [::1]:51552: reflect: call of reflect.Value.NumField on interface Value
+goroutine 12 [running]:
+net/http.(*conn).serve.func1(0xc8200ca8f0, 0x5801398, 0xc82002a120)
+	/usr/local/go/src/net/http/server.go:1287 +0xb5
+reflect.flag.mustBe(0xd4, 0x19)
+	/usr/local/go/src/reflect/value.go:199 +0xa6
+reflect.Value.NumField(0x4413860, 0xc82000b880, 0xd4, 0x4da40a8)
+	/usr/local/go/src/reflect/value.go:1146 +0x2a
+github.com/danmondy/conspire/repo.(*Repo).Insert(0xc8201300e8, 0x4534cb0, 0x7, 0x44fd7c0, 0xc82008ab00, 0x0, 0x0)
+	/Users/daniel/Code/go/src/github.com/danmondy/conspire/repo/repo.go:43 +0x281
+github.com/danmondy/conspire/routes.profile(0x4da49d8, 0xc8200ca9a0, 0xc8200ead20)
+	/Users/daniel/Code/go/src/github.com/danmondy/conspire/routes/index.go:58 +0x1b6
+net/http.HandlerFunc.ServeHTTP(0x45e6308, 0x4da49d8, 0xc8200ca9a0, 0xc8200ead20)
+	/usr/local/go/src/net/http/server.go:1422 +0x3a
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc82012e9b0, 0x4da49d8, 0xc8200ca9a0, 0xc8200ead20)
+	/Users/daniel/Code/go/src/github.com/gorilla/mux/mux.go:98 +0x29e
+net/http.serverHandler.ServeHTTP(0xc8201368a0, 0x4da49d8, 0xc8200ca9a0, 0xc8200ead20)
+	/usr/local/go/src/net/http/server.go:1862 +0x19e
+net/http.(*conn).serve(0xc8200ca8f0)
+	/usr/local/go/src/net/http/server.go:1361 +0xbee
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:1910 +0x3f6
+2015/08/31 06:26:19 Profile Handler hit
+2015/08/31 06:26:19 HERE: {0 Sarah Jenkins sj@gmail.com  -86.021 33.53  0001-01-01 00:00:00 +0000 UTC}
+2015/08/31 06:26:19 http: panic serving [::1]:51588: reflect: call of reflect.Value.NumField on interface Value
+goroutine 13 [running]:
+net/http.(*conn).serve.func1(0xc8200caa50, 0x5801398, 0xc82002a128)
+	/usr/local/go/src/net/http/server.go:1287 +0xb5
+reflect.flag.mustBe(0xd4, 0x19)
+	/usr/local/go/src/reflect/value.go:199 +0xa6
+reflect.Value.NumField(0x4413860, 0xc82000b990, 0xd4, 0x4da40a8)
+	/usr/local/go/src/reflect/value.go:1146 +0x2a
+github.com/danmondy/conspire/repo.(*Repo).Insert(0xc8201300e8, 0x4534cb0, 0x7, 0x44fd7c0, 0xc82008ad00, 0x0, 0x0)
+	/Users/daniel/Code/go/src/github.com/danmondy/conspire/repo/repo.go:43 +0x281
+github.com/danmondy/conspire/routes.profile(0x4da49d8, 0xc8200cab00, 0xc8200eae00)
+	/Users/daniel/Code/go/src/github.com/danmondy/conspire/routes/index.go:58 +0x1b6
+net/http.HandlerFunc.ServeHTTP(0x45e6308, 0x4da49d8, 0xc8200cab00, 0xc8200eae00)
+	/usr/local/go/src/net/http/server.go:1422 +0x3a
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc82012e9b0, 0x4da49d8, 0xc8200cab00, 0xc8200eae00)
+	/Users/daniel/Code/go/src/github.com/gorilla/mux/mux.go:98 +0x29e
+net/http.serverHandler.ServeHTTP(0xc8201368a0, 0x4da49d8, 0xc8200cab00, 0xc8200eae00)
+	/usr/local/go/src/net/http/server.go:1862 +0x19e
+net/http.(*conn).serve(0xc8200caa50)
+	/usr/local/go/src/net/http/server.go:1361 +0xbee
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:1910 +0x3f6

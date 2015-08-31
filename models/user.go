@@ -12,6 +12,7 @@ type User struct{
 	Rank int
 	Since time.Time
 }
+
 func NewUser(email string, password string, rank int)User{
 	u := User{Email: email, Rank: rank}
 	u.SetHashword([]byte(password))
@@ -28,6 +29,7 @@ func (u *User) SetHashword(password []byte)error{
 		return nil
 	}
 }
+
 func (u *User) CompareHash(p []byte)error{
 	return bcrypt.CompareHashAndPassword([]byte(u.Hashword), p)
 }

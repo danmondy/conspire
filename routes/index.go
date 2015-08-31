@@ -17,6 +17,8 @@ import (
 func RegisterRoutes(r *mux.Router){
 	log.Printf("registering routes...")
 	r.HandleFunc("/cards/edit/{id}", editHandler)
+	r.HandleFunc("/project/{project_id}", projectDetail)
+	r.HandleFunc("/{username}/", profile)
 	r.HandleFunc("/login", loginHandler)
 	r.HandleFunc("/logout",logoutHandler)
 	r.HandleFunc("/", indexHandler)
@@ -34,6 +36,8 @@ func groupAdminOnly(next func(w http.ResponseWriter, r *http.Request)) http.Hand
 	}
 }
 
+
+
 //////ROUTES
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
@@ -46,10 +50,14 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	display(w, "index", model)
 }
 
-func postEventHandler(w http.ResponseWriter, r *http.Request){
+func projectDetail(w http.ResponseWriter, r *http.Request){
 	
 }
-
+func profile(w http.ResponseWriter, r *http.Request){
+	log.Println("Profile Handler hit")
+	Repo.Insert("project", Project{Name:"Sarah Jenkins", CustomerEmail:"sj@gmail.com", Lon:"33.53", Lat:"-86.021"})
+	w.Write([]byte("Check the log, Goof."))
+}
 func editHandler(w http.ResponseWriter, r *http.Request) {
 	//vars := mux.Vars(r)
 	//id := vars["id"]

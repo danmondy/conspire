@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"encoding/json"
 	"io/ioutil"
-	"net/http"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gorilla/mux"
@@ -25,30 +25,34 @@ func init() {
 	}
 }
 
+//We need to open a connection to a log file and a db in the main method so they will remain
+//open until the application closes. Not sure if there is a way around this.
 func main() {
 	//configure log file
-	f, err := os.OpenFile("serverlog.txt", os.O_RDWR | os.O_CREATE | os.O_TRUNC, 0666)
+	f, err := os.OpenFile("serverlog.txt", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
 	if err != nil {
 		panic(err)
 	}
+
 	defer f.Close()
 	log.SetOutput(f)
-	log.Println("Log file opened for writing")
-	log.Println(config.Db)
+	log.Println("logfile: ", f.Name)
 
+	//configure db
 	db, err := sql.Open("sqlite3", config.Db)
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
+	//register routes, server listen.
 	routes.Repo = repo.NewRepo(db)
-
 	r := mux.NewRouter()
 	routes.RegisterRoutes(r)
-
 	log.Println("Server running on", config.Port)
-	http.ListenAndServe(":"+config.Port, r)
+	log.Fatal(http.ListenAndServe(":"+config.Port, r))
+
+
 }
 
 func readConfig() error {

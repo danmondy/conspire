@@ -16,10 +16,8 @@ var (
 )
 
 func init(){
-
 	log.Println("Routes initializer called")
 	templates = template.Must(template.ParseGlob("templates/*.html"))
-	
 }
 
 func display(w http.ResponseWriter, tmpl string, data interface{}) {

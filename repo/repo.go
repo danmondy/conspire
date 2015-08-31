@@ -1,5 +1,5 @@
-/* 
-Repo is a parent class which implements generic CRUD operations for any resource. 
+/*
+Repo is a parent class which implements generic CRUD operations for any resource.
 Any class that embed a repo will have a default working CRUD model with the following methods:
 
  *GetOne
@@ -13,111 +13,119 @@ These methods can be overridden if need be and can be made to throw an error if 
 
 package repo
 
-import(
-	"fmt"
+import (
 	"database/sql"
+	"errors"
 	"os"
 	"time"
-	"errors"
-	
-	_ "github.com/go-sql-driver/mysql"
+	"reflect"
+	"log"
+
 	. "github.com/danmondy/conspire/models"
+	_ "github.com/go-sql-driver/mysql"
 )
-const(
+
+const (
 	SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s)"
 	SQL_UPDATE = "UPDATE %s SET %s WHERE %s"
 	SQL_DELETE = "DELETE FROM %s WHERE %s"
 )
 
-type Repo struct{
+type Repo struct {
 	db *sql.DB
 }
 
+func (*Repo) Insert(table string, obj interface{}) error {
+	s := reflect.ValueOf(&obj).Elem()
+	log.Printf("HERE: %v\n", s)
+	typeOfS := s.Type()
+	
+	for i:= 0; i < s.NumField(); i++{
+		fieldName := typeOfS.Field(i).Name
+		fieldType := s.Type()
+		fieldValue:= s.Interface()
+		log.Printf("Flippant: %s - %s - %v\n", fieldName, fieldType, fieldValue) 
+	}
 
-func (*Repo) Insert(table string, obj interface{}) error{
+
+	//sql := fmt.Sprint(SQL_INSERT, string, )
 	return errors.New("not implemented")
 }
 
-func (*Repo) GetOne(table string, id int) (interface{}, error){
-	
+func (*Repo) GetOne(table string, id int) (interface{}, error) {
+
 	return nil, errors.New("not implemented")
 }
 
-
-func (*Repo) GetAll(where ...string) ([]interface{}, error){
+func (*Repo) GetAll(where ...string) ([]interface{}, error) {
 	return nil, errors.New("not implemented")
 }
 
-
-func (*Repo) Delete(id int) (interface{}, error){
+func (*Repo) Delete(id int) (interface{}, error) {
 	return nil, errors.New("not implemented")
 }
 
-
-func NewRepo(db *sql.DB) *Repo{
+func NewRepo(db *sql.DB) *Repo {
 	r := &Repo{db}
-	
-	err := r.RebuildDB() //comment this out when you don't want to wipe the db
-	if err != nil{
-		fmt.Println(err)
-	}
+
+//	err := r.RebuildDB() //comment this out when you don't want to wipe the db
+//	if err != nil {
+//		log.Println(err)
+//	}
 	return r
 }
 
-
-
-
-func (r *Repo)RebuildDB()error{
+func (r *Repo) RebuildDB() error {
 	os.Remove("./sql/flog.db")
-	
-	//sqlite doesn't require autoincrement on id's (integer primary key auto assigns an unused random rowid if empty)	
-	sqlStmt := "create table users (id integer not null primary key, email text, hashword text, rank integer, since text);"+
-		"create table events (id integer not null primary key, title text, description text, long text, lat text, date text, communityId integer, creatorId integer, open integer);"+
-		"create table eventUsers (eventId integer not null primary key, userId integer, status integer); "
-		
-	
+
+	//sqlite doesn't require autoincrement on id's (integer primary key auto assigns an unused random rowid if empty)
+	sqlStmt := "create table user (id integer not null primary key, email text, hashword text, rank integer, since text);" +
+		"create table project (id integer not null primary key, title text, description text, long text, lat text, date text, communityId integer, creatorId integer, open integer);" +
+		"create table users_project (user_id integer not null primary key, project_id integer, role text);" +
+		"create table component (id integer not null primary key, project_id text, description text, start-date text, end-date text);" +
+		"create table task (id integer not null primary key, project_id text, completed integer, creator_id integer )"
+
 	_, err := r.db.Exec(sqlStmt)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
 	users := []User{NewUser("danmondy@gmail.com", "integrity", 5), NewUser("badguy@gmail.com", "dishonesty", 5)}
 
 	tx, err := r.db.Begin()
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
 	stmt, err := tx.Prepare("insert into users(email, hashword, role, since) values(?,?,?,?)")
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	defer stmt.Close()
 	for _, u := range users {
 		_, err := stmt.Exec(u.Email, u.Hashword, u.Rank, TimeToString(u.Since))
-		if err != nil{
+		if err != nil {
 			panic(err)
 		}
 	}
 
-	stmt3, err := tx.Prepare("insert into users(email, hashword, role, since) values(?,?,?,?)")
-	if err != nil{
-		return err
-	}
-	defer stmt3.Close()
-	for _, u := range users {
-		_, err := stmt.Exec(u.Email, u.Hashword, u.Rank, TimeToString(u.Since))
-		if err != nil{
-			panic(err)
-		}
-	}
-
-
-	stmt2, err := tx.Prepare("insert into projects(title, description, long, lat, date, creatorId, open) values(?,?,?,?,?,?,?,?)")
-	if err != nil{
+	stmt2, err := tx.Prepare("insert into users(email, hashword, role, since) values(?,?,?,?)")
+	if err != nil {
 		return err
 	}
 	defer stmt2.Close()
+	for _, u := range users {
+		_, err := stmt.Exec(u.Email, u.Hashword, u.Rank, TimeToString(u.Since))
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	stmt3, err := tx.Prepare("insert into projects(title, description, long, lat, date, creatorId, open) values(?,?,?,?,?,?,?,?)")
+	if err != nil {
+		return err
+	}
+	defer stmt3.Close()
 
 	/*events := []Event{
 		Event{Title:"Go to the city",Description:"Seriously go there", Long:"33.53", Lat:"-86.021", Date:time.Now(),Open:false},
@@ -130,20 +138,17 @@ func (r *Repo)RebuildDB()error{
 		}
 	}*/
 
-
 	tx.Commit()
 
 	return nil
 }
 
-func TimeToString(t time.Time) string{
+func TimeToString(t time.Time) string {
 	return t.Format(time.RFC3339)
 }
-func StringToTime(s string)(time.Time, error){
-	return time.Parse(time.RFC3339, s)//returns both a time and an error so it can be returned directly.
+func StringToTime(s string) (time.Time, error) {
+	return time.Parse(time.RFC3339, s) //returns both a time and an error so it can be returned directly.
 }
-
-
 
 //Generic query for temp use
 //Query for any object, ...???then use the model's "MapRows()" method to get a slice of structs-maybe?
@@ -154,7 +159,7 @@ func StringToTime(s string)(time.Time, error){
 // 	if err != nil{
 // 		return nil, err
 // 	}
-	
+
 // 	for r.Next(){
 // 		vals := Make(map[string]interface{})
 // 		err = r.MapScan(vals)
@@ -164,6 +169,5 @@ func StringToTime(s string)(time.Time, error){
 // 		rmaps = append(rmaps, vals)
 // 	}
 
-	
 // 	return rmaps, err//returning rows is unsafe, it keeps the connection open
 // }

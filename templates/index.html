@@ -1,19 +1,21 @@
 {{define "index"}}
-{{template "_header" .Page}}
+{{template "_header" .}}
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
     <div class="page-header">
-      <h1>{{.Page.Title}}</h1>
+      <h1>{{.Title}}</h1>
       <div>This is the Main page</div>
       <div class="row">
-      {{range .Products}}
-      {{template "_product" .}}
+      {{if .Model}}
+        {{range .Model}}
+          {{template "_project" .}}
+        {{end}}
       {{end}}
       </div>
     </div>
     </div>
   </div>
 </div>
-{{template "_footer" .Page}}
+{{template "_footer" .}}
 {{end}}
